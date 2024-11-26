@@ -1,5 +1,5 @@
 # Projeto de Web services com Spring Boot e JPA
-
+|| ## Diagrama de Classes em Mermaid
  ```mermaid
 classDiagram
   class User {

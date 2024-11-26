@@ -56,5 +56,7 @@ classDiagram
   Order "1" ..> "*" OrderItem
   Product "*" --> "1..*" Category
   Order "1" --> "0..1" Payment
-  
+  ```
+>## Domain Instance
+![image](https://github.com/user-attachments/assets/c89a45bc-a125-4af4-a0f1-51ed27eb445d)
   

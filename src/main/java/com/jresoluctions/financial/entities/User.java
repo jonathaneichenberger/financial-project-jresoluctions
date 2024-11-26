@@ -1,8 +1,6 @@
 package com.jresoluctions.financial.entities;
 
 import jakarta.persistence.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
-
 import java.io.Serializable;
 
 @Entity

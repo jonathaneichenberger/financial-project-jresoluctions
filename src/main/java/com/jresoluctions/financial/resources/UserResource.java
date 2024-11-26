@@ -1,4 +1,4 @@
-package com.jresoluctions.financial.Resources;
+package com.jresoluctions.financial.resources;
 
 import com.jresoluctions.financial.entities.User;
 import org.springframework.http.ResponseEntity;

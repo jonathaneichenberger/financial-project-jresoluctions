@@ -3,8 +3,11 @@ package com.jresoluctions.financial.services;
 
 import com.jresoluctions.financial.entities.User;
 import com.jresoluctions.financial.repositories.UserRepository;
+import com.jresoluctions.financial.services.exceptions.DatabaseException;
 import com.jresoluctions.financial.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +18,10 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+    public UserService(UserRepository repository) {
+        this.repository = repository;
+    }
 
     public List<User> findAll(){
         return repository.findAll();
@@ -30,7 +37,16 @@ public class UserService {
     }
 
     public void delete(Long id){
-        repository.deleteById(id);
+        if(!repository.existsById(id)){
+            throw new ResourceNotFoundException(id);
+        }
+        try {
+            repository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new ResourceNotFoundException(id);
+        } catch (DataIntegrityViolationException e){
+            throw new DatabaseException(e.getMessage());
+        }
     }
 
     public User update(Long id, User obj){
